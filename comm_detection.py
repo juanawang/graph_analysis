@@ -58,9 +58,13 @@ def decompose_graph(ig):
 def compose_sub_nodes_comm(subgraph,label_index,comm_num):
     communities = subgraph.community_multilevel()
     membership = communities.membership
-    nodes = [{"index":label_index[str(node.labels)],label_index[str(node.labels)]:node[label_index[str(node.labels)]]} for node in subgraph.vs["name"]]
+    sg_vs = subgraph.vs["name"]
+    nodes = [{"index":label_index[str(node.labels)],label_index[str(node.labels)]:node[label_index[str(node.labels)]]} for node in sg_vs]
+    
+    propValue_idx = dict((d[label_index[str(d.labels)]], index) for (index, d) in enumerate(sg_vs))
     for node in nodes:
-        idx = next((index for (index, d) in enumerate(subgraph.vs['name']) if d[node['index']] == node[node['index']]), None)
+        #idx = next((index for (index, d) in enumerate(sg_vs) if d[node['index']] == node[node['index']]), None)
+        idx = propValue_idx.get(node[node['index']])
         node["community"] = membership[idx]+comm_num
     return nodes, len(communities)
         
