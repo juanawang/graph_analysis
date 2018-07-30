@@ -137,7 +137,7 @@ def comm_detect_and_writeback(ig,graph,label_index):
     comm_num = get_db_max_commid(graph) + 1
     logger.info('composing nodes(community info)...')
     nodes_user,nodes_device,nodes_mobile,nodes_idcard,nodes_bankcard = compose_nodes_comm(ig,label_index,comm_num)
-    writeback_prop(graph,"community",nodes_user=nodes_user,nodes_device=nodes_device,nodes_idcard=nodes_idcard,nodes_bankcard=nodes_bankcard)
+    writeback_prop(graph,"community",nodes_user=nodes_user,nodes_mobile=nodes_mobile,nodes_device=nodes_device,nodes_idcard=nodes_idcard,nodes_bankcard=nodes_bankcard)
 
 def sg_decompose_and_writeback(ig,graph,label_index):
     sg_num = get_db_max_sgid(graph) + 1
